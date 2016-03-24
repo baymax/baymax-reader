@@ -17,6 +17,9 @@ EXECUTABLE = baymax-reader
 
 ALL: $(EXECUTABLE) connection logger sender ui
 
+$(OBJ_DIR)signalling.o: $(SRC_DIR)signalling.c $(HEADER_DIR)signalling.h $(OBJ_DIR)pipeline.o
+	$(CC) -c -o $@ $< $(CFLAGS)
+
 $(OBJ_DIR)pipeline.o: $(SRC_DIR)pipeline.cpp $(HEADER_DIR)pipeline.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
@@ -29,7 +32,7 @@ $(OBJ_DIR)init.o: $(SRC_DIR)init.cpp $(HEADER_DIR)init.h $(HEADER_DIR)errormsg.h
 $(OBJ_DIR)serial.o: $(SRC_DIR)serial.cpp $(HEADER_DIR)serial.h $(OBJ_DIR)cmdparser.o
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(OBJ_DIR)main.o: $(SRC_DIR)main.cpp $(HEADER_DIR)main.h $(OBJ_DIR)serial.o $(OBJ_DIR)init.o
+$(OBJ_DIR)main.o: $(SRC_DIR)main.cpp $(HEADER_DIR)main.h $(OBJ_DIR)serial.o $(OBJ_DIR)init.o $(OBJ_DIR)signalling.o $(OBJ_DIR)pipeline.o
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(EXECUTABLE): $(OBJ_DIR)main.o
@@ -44,8 +47,8 @@ run:
 debug: $(EXECUTABLE) run
 
 install: $(EXECUTABLE)
-	cp $(BIN_DIR)$(EXECUTABLE) /bin/
-	chmod +x /bin/$(EXECUTABLE)
+	cp $(BIN_DIR)$(EXECUTABLE) /usr/bin/
+	chmod +x /usr/bin/$(EXECUTABLE)
 	
 cleanbin:
 	rm $(BIN_DIR)* 

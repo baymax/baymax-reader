@@ -1,5 +1,6 @@
 #include "serial.h"
 #include "cmdparser.h"
+#include "errormsg.h"
 
 #include <wiringPi.h>
 #include <wiringSerial.h>
@@ -13,7 +14,7 @@ int fd;
 int openSerial(const char* device) {
 if ((fd = serialOpen ("/dev/ttyUSB1", 9600)) < 0)
   {
-    fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
+    fprintf (stderr, "%c%d", SERIAL_OPENING_FAILED, errno);
     return -1 ;
   }    
 }

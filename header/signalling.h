@@ -1,11 +1,8 @@
-#ifndef INIT_H
-#define INIT_H
-
-int initWiringPi();
+#ifndef SIGNALLING_H
+#define SIGNALLING_H
 
 void processSigint(int signum);
 void processSigpipe(int signum);
 void registerSignals();
 
-
-#endif // INIT_H
+#endif // SIGNALLING_H
