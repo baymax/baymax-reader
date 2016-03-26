@@ -29,7 +29,7 @@ $(OBJ_DIR)cmdparser.o: $(SRC_DIR)cmdparser.cpp $(HEADER_DIR)cmdparser.h $(OBJ_DI
 $(OBJ_DIR)init.o: $(SRC_DIR)init.cpp $(HEADER_DIR)init.h $(HEADER_DIR)errormsg.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(OBJ_DIR)serial.o: $(SRC_DIR)serial.cpp $(HEADER_DIR)serial.h $(OBJ_DIR)cmdparser.o
+$(OBJ_DIR)serial.o: $(SRC_DIR)serial.cpp $(HEADER_DIR)serial.h $(OBJ_DIR)cmdparser.o $(OBJ_DIR)pipeline.o
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(OBJ_DIR)main.o: $(SRC_DIR)main.cpp $(HEADER_DIR)main.h $(OBJ_DIR)serial.o $(OBJ_DIR)init.o $(OBJ_DIR)signalling.o $(OBJ_DIR)pipeline.o

@@ -15,9 +15,12 @@ void registerSignals() {
 }
 
 void processSigint(int signum) {
-    if (closeLoggerPipe < 0) {
+    if (closeGtkPipe < 0) {
         exit(EXIT_FAILURE);
-    }   
+    } if (closeLoggerPipe < 0) {
+        exit(EXIT_FAILURE);
+    }
+    exit(EXIT_SUCCESS);
 }
 
 void processSigpipe(int signum) {

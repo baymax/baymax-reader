@@ -7,13 +7,13 @@
 #include <stdio.h>
 
 int main() {
+    //printf(getpid());
+    fflush(stdout);
     void registerSignals();
-	if (initWiringPi() > -1) {
-        if(openLoggerPipe() > -1) {
-		    if (openSerial("/dev/ttyUSB0")> -1) {
+    if (initWiringPi() < 0) return 1;
+    if (openGtkPipe() < 0) return 1;
+	if (openSerial("/dev/ttyUSB1")> -1) {
 			    readSerial();
-		    } else return SERIAL_OPENING_FAILED;
-        } else return LOGGER_PIPE_OPENING_FAILED;
-	} else return WIRINGPI_INIT_FAILED;
+	} else return 1;
 	return 0;
 }
